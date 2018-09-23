@@ -30,8 +30,39 @@ package fintech.homework01
 // и т.д.
 
 class Hangman(io: IODevice) {
+
   def play(word: String): Unit = {
-    ???
+    var wordState:String = "_" * word.length
+    var gameEnded:Boolean = false
+    var currStage = 0
+    while (!gameEnded){
+      println(wordState)
+      println("Guess a letter:")
+      val l:String = io.readLine()
+      if (word contains l) {
+        val pattern = l.r
+        val out = pattern.findAllIn(word)
+        while (out.hasNext){
+          out.next()
+          val index = out.start
+          wordState = wordState.updated(index, l).mkString("")
+        }
+        if (!wordState.contains("_"))
+          {
+            println("You won!")
+            gameEnded = true
+          }
+      }
+      else {
+        println(stages(currStage))
+        if (currStage == 7){
+          println("You lost!")
+          gameEnded = true
+        }
+        currStage += 1
+      }
+    }
+
   }
 
   val stages = List(
