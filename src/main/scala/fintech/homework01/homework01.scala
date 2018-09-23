@@ -36,7 +36,7 @@ class Hangman(io: IODevice) {
     var gameEnded:Boolean = false
     var currStage = 0
     while (!gameEnded){
-      println(wordState)
+      println("Word: " + wordState)
       println("Guess a letter:")
       val l:String = io.readLine()
       if (word contains l) {
