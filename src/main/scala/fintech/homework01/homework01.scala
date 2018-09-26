@@ -36,8 +36,8 @@ class Hangman(io: IODevice) {
     var gameEnded:Boolean = false
     var currStage = 0
     while (!gameEnded){
-      println("Word: " + wordState)
-      println("Guess a letter:")
+      io.printLine("Word: " + wordState)
+      io.printLine("Guess a letter:")
       val l:String = io.readLine()
       if (word contains l) {
         val pattern = l.r
@@ -49,14 +49,14 @@ class Hangman(io: IODevice) {
         }
         if (!wordState.contains("_"))
           {
-            println("You won!")
+            io.printLine("You won!")
             gameEnded = true
           }
       }
       else {
-        println(stages(currStage))
+        io.printLine(stages(currStage))
         if (currStage == 7){
-          println("You lost!")
+          io.printLine("You lost!")
           gameEnded = true
         }
         currStage += 1
